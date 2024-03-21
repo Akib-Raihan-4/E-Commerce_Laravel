@@ -64,12 +64,12 @@
 		</div>
 		<!-- ./wrapper -->
 		<!-- jQuery -->
-		<script src="plugins/jquery/jquery.min.js"></script>
+		<script src="{{ asset('admin_designs/plugins/jquery/jquery.min.js')}}"></script>
 		<!-- Bootstrap 4 -->
-		<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="{{asset('admin_designs/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 		<!-- AdminLTE App -->
-		<script src="js/adminlte.min.js"></script>
+		<script src="{{ asset('admin_designs/js/adminlte.min.js')}}"></script>
 		<!-- AdminLTE for demo purposes -->
-		<script src="js/demo.js"></script>
+		{{-- <script src="js/demo.js"></script> --}}
 	</body>
 </html>
