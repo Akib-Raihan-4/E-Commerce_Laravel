@@ -21,3 +21,4 @@ Route::get('/', function () {
 
 
 Route::get('/admin/login',[AdminLoginController::class,'index'])->name('admin.login');
+
