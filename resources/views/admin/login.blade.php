@@ -24,7 +24,7 @@
 					<form action="{{ route('admin.authenticate')}}" method="post">
 						@csrf
 				  		<div class="input-group mb-3">
-							<input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"  placeholder="Email">
+							<input type="email" name="email" value="{{old('email')}}" id="email" class="form-control @error('email') is-invalid @enderror"  placeholder="Email">
 							<div class="input-group-append">
 					  			<div class="input-group-text">
 									<span class="fas fa-envelope"></span>
