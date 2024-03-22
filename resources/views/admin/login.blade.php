@@ -7,7 +7,7 @@
 		<!-- Google Font: Source Sans Pro -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 		<!-- Font Awesome -->
-		<link rel="stylesheet" href="{{ asset('admin_designs/plugins/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('admin_designs/plugins/fontawesome-free/css/all.min.css')}}">
 		<!-- Theme style -->
 		<link rel="stylesheet" href="{{asset('admin_designs/css/adminlte.min.css')}}">
 		<link rel="stylesheet" href="{{asset('admin_designs/css/custom.css')}}">
@@ -21,9 +21,10 @@
 			  	</div>
 			  	<div class="card-body">
 					<p class="login-box-msg">Sign in to start your session</p>
-					<form action="dashboard.html" method="post">
+					<form action="{{ route('admin.authenticate')}}" method="post">
+						@csrf
 				  		<div class="input-group mb-3">
-							<input type="email" class="form-control" placeholder="Email">
+							<input type="email" name="email" id="email" class="form-control" placeholder="Email">
 							<div class="input-group-append">
 					  			<div class="input-group-text">
 									<span class="fas fa-envelope"></span>
@@ -31,7 +32,7 @@
 							</div>
 				  		</div>
 				  		<div class="input-group mb-3">
-							<input type="password" class="form-control" placeholder="Password">
+							<input type="password" name="password" id="password" class="form-control" placeholder="Password">
 							<div class="input-group-append">
 					  			<div class="input-group-text">
 									<span class="fas fa-lock"></span>
