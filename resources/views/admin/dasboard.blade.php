@@ -64,3 +64,10 @@
 </section>
 <!-- /.content -->
 @endsection
+
+
+@section('customJs')
+<script>
+	console.log('hello')
+</script>
+@endsection
