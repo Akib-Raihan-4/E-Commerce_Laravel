@@ -16,7 +16,7 @@ class CategoryController extends Controller
     }
 
     public function store(){
-
+        
     }
 
     public function edit(){

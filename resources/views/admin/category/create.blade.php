@@ -19,28 +19,40 @@
 <section class="content">
 	<!-- Default box -->
 	<div class="container-fluid">
-		<div class="card">
-			<div class="card-body">								
-				<div class="row">
-					<div class="col-md-6">
-						<div class="mb-3">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" class="form-control" placeholder="Name">	
+		<form action="" method="post" id="categoryForm" name="categoryForm">
+			<div class="card">
+				<div class="card-body">								
+					<div class="row">
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label for="name">Name</label>
+								<input type="text" name="name" id="name" class="form-control" placeholder="Name">	
+							</div>
 						</div>
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label for="slug">Slug</label>
+								<input type="text" name="slug" id="slug" class="form-control" placeholder="Slug">	
+							</div>
+						</div>		
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label for="status">Status</label>
+								<select name="status" id="status" class="form-control">
+									<option value="1">Active</option>
+									<option value="0">Block</option>
+								</select>	
+							</div>
+						</div>								
 					</div>
-					<div class="col-md-6">
-						<div class="mb-3">
-							<label for="email">Slug</label>
-							<input type="text" name="slug" id="slug" class="form-control" placeholder="Slug">	
-						</div>
-					</div>									
-				</div>
-			</div>							
-		</div>
-		<div class="pb-5 pt-3">
-			<button class="btn btn-primary">Create</button>
-			<a href="brands.html" class="btn btn-outline-dark ml-3">Cancel</a>
-		</div>
+				</div>							
+			</div>
+		
+			<div class="pb-5 pt-3">
+				<button type="submit" class="btn btn-primary">Create</button>
+				<a href="#" class="btn btn-outline-dark ml-3">Cancel</a>
+			</div>
+		</form>
 	</div>
 	<!-- /.card -->
 </section>
@@ -50,6 +62,20 @@
 
 @section('customJs')
 <script>
-	console.log('hello')
+	$("#categoryForm").submit(function(event){
+		event.preventDefault();
+		var element = $(this);
+		$.ajax({
+			url:'{{ route("categories.store") }}',
+			type: 'post',
+			data: element.serializeArray(),
+			dataType: 'json',
+			success: function(response){
+
+			}, error:function(jqXHR,exception){
+				console.log("Something went wrong");
+			}
+		})
+	});
 </script>
 @endsection
