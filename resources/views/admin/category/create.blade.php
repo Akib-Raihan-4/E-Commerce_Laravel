@@ -67,6 +67,7 @@
 	$("#categoryForm").submit(function(event){
 		event.preventDefault();
 		var element = $(this);
+		// Use AJAX for asyncronously submit data on db
 		$.ajax({
 			url:'{{ route("categories.store") }}',
 			type: 'post',
