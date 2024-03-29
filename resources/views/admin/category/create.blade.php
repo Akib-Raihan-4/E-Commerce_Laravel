@@ -33,7 +33,7 @@
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label for="slug">Slug</label>
-								<input type="text" name="slug" id="slug" class="form-control" placeholder="Slug">
+								<input type="text" readonly name="slug" id="slug" class="form-control" placeholder="Slug">
 								<p></p>	
 							</div>
 						</div>		
@@ -117,6 +117,21 @@
 				console.log("Something went wrong");
 			}
 		})
+	});
+
+	$('#name').change(function(){
+		element = $(this)
+		$.ajax({
+			url:'{{ route("getSlug") }}',
+			type: 'get',
+			data: {title: element.val()},
+			dataType: 'json',
+			success: function(response){
+				if(response["status"]== true){
+					$("#slug").val(response["slug"])
+				}
+			}
+		});
 	});
 </script>
 @endsection
