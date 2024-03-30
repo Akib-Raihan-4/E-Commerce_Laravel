@@ -9,7 +9,7 @@
 				<h1>Create Category</h1>
 			</div>
 			<div class="col-sm-6 text-right">
-				<a href="categories.html" class="btn btn-primary">Back</a>
+				<a href="{{ route('categories.index') }}" class="btn btn-primary">Back</a>
 			</div>
 		</div>
 	</div>
@@ -52,7 +52,7 @@
 		
 			<div class="pb-5 pt-3">
 				<button type="submit" class="btn btn-primary">Create</button>
-				<a href="#" class="btn btn-outline-dark ml-3">Cancel</a>
+				<a href="{{ route('categories.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
 			</div>
 		</form>
 	</div>
@@ -75,6 +75,9 @@
 			dataType: 'json',
 			success: function(response){
 				if(response["status"]== true){
+
+					window.location.href="{{ route('categories.index') }}"
+
 					$("#slug").addClass('is-invalid')
 						.siblings('p')
 						.addClass('invalid-feedback')
