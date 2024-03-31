@@ -93,6 +93,7 @@
                 </table>										
             </div>
             <div class="card-footer clearfix">
+                {{-- Pagination --}}
                 {{ $categories->links() }}
             </div>
         </div>
