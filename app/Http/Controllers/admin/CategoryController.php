@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Category;
 use App\Models\TempImage;
 use Illuminate\Support\Facades\File;
-
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class CategoryController extends Controller
 {
@@ -50,6 +51,7 @@ class CategoryController extends Controller
                 $ext = last($extArray);
 
                 $newImageName = $category->id.'.'.$ext;
+                // echo $newImageName;
 
                 $sPath = public_path().'/temp/'.$tempImage->name;
                 $dPath = public_path().'/uploads/category/'.$tempImage->name;
@@ -57,9 +59,14 @@ class CategoryController extends Controller
                 File::copy($sPath,$dPath);
 
                 // // Generate Image Thumbnail
-                $dPath = public_path().'/uploads/category/thumb'.$newImageName;
+                $dPath = public_path().'/uploads/category/thumb/'.$newImageName;
+
 
                 // resize image using image intervention
+                $manager = new ImageManager(new Driver());
+                $image = $manager->read($sPath);
+                $image = $image->resize(300,300);
+                $image->toPng()->save($dPath);
 
 
                 $category->image = $newImageName;
