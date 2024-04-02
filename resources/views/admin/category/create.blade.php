@@ -37,8 +37,11 @@
 								<p></p>	
 							</div>
 						</div>	
+
+						{{-- DropZone Image Upload  --}}
 						<div class="col-md-6">
 							<div class="mb-3">
+								<input type="text" id="image_id" name="image_id" value="">
 								<label for="image">Image</label>
 								<div id="image" class="dropzone dz-clickable">
 									<div class="dz-message needsclick">
