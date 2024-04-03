@@ -104,6 +104,7 @@ class CategoryController extends Controller
 
         $category = Category::find($categoryID);
         if(empty($category)){
+            session()->flash('error', 'Category not found');
             return response()->json([
                 'status' => false,
                 'notFound' => true,
@@ -190,7 +191,11 @@ class CategoryController extends Controller
         $category = Category::find($categoryID);
 
         if(empty($category)){
-            return redirect()->route('categories.index');
+            session()->flash('error', 'Category not found');
+            return response()->json([
+                'status' => true,
+                'message'=> 'Category not found'
+            ]);
         }
 
         File::delete(public_path().'/uploads/category/'.$category->image);
