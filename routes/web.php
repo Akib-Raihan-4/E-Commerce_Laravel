@@ -60,6 +60,8 @@ Route::group(['prefix' => 'admin'], function(){
 
         Route::put('/categories/{category}/edit',[CategoryController::class,'update'])->name('categories.update');
 
+        Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.delete');
+
 
 
     });
