@@ -58,6 +58,8 @@ Route::group(['prefix' => 'admin'], function(){
 
         Route::get('/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.edit');
 
+        Route::put('/categories/{category}/edit',[CategoryController::class,'update'])->name('categories.update');
+
 
 
     });

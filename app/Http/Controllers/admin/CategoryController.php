@@ -100,7 +100,77 @@ class CategoryController extends Controller
         return view('admin.category.edit', compact( 'category' ));
     }
 
-    public function update(){
+    public function update($categoryID, Request $request){
+
+        $category = Category::find($categoryID);
+        if(empty($category)){
+            return response()->json([
+                'status' => false,
+                'notFound' => true,
+                'message'=> 'Category not found',
+
+            ]);
+        }
+       
+        // To check if the input field are given
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug,'.$category->id.',id',
+
+        ]);
+
+        if ($validator->passes()){
+            // storing on DB 
+            $category->name = $request->name;
+            $category->slug = $request->slug;
+            $category->status = $request->status;
+            $category->save();
+
+
+            // Save Image
+            if(!empty($request->image_id)){
+                $tempImage = TempImage::find($request->image_id);
+                $extArray = explode('.',$tempImage->name);
+                $ext = last($extArray);
+
+                $newImageName = $category->id.'.'.$ext;
+                // echo $newImageName;
+
+                $sPath = public_path().'/temp/'.$tempImage->name;
+                $dPath = public_path().'/uploads/category/'.$tempImage->name;
+
+                File::copy($sPath,$dPath);
+
+                // // Generate Image Thumbnail
+                $dPath = public_path().'/uploads/category/thumb/'.$newImageName;
+
+
+                // resize image using image intervention
+                $manager = new ImageManager(new Driver());
+                $image = $manager->read($sPath);
+                $image = $image->resize(300,300);
+                $image->toPng()->save($dPath);
+
+
+                $category->image = $newImageName;
+                $category->save();
+
+            }
+            
+
+            session()->flash('success', 'Category updated successfully');
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Category updated successfully'
+            ]);
+
+        }else{
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
 
     }
     

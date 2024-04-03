@@ -91,7 +91,7 @@
 		$("button[type=submit]").prop('disabled',true);
 		// Use AJAX for asyncronously submit data on db
 		$.ajax({
-			url:'{{ route("categories.store") }}',
+			url:'{{ route("categories.update") }}',
 			type: 'post',
 			data: element.serializeArray(),
 			dataType: 'json',
