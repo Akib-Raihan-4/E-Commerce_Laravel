@@ -30,6 +30,7 @@ class CategoryController extends Controller
 
 
     public function store(Request $request){
+        // To check if the input field are given
         $validator = Validator::make($request->all(),[
             'name' => 'required',
             'slug' => 'required|unique:categories',
@@ -37,6 +38,7 @@ class CategoryController extends Controller
         ]);
 
         if ($validator->passes()){
+            // storing on DB 
             $category = new Category();
             $category->name = $request->name;
             $category->slug = $request->slug;
@@ -90,8 +92,8 @@ class CategoryController extends Controller
         }
     }
 
-    public function edit(){
-
+    public function edit($categoryID, Request $request){
+        return view('admin.category.edit');
     }
 
     public function update(){

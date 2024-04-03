@@ -56,6 +56,10 @@ Route::group(['prefix' => 'admin'], function(){
 
         Route::post('/upload-temp-image',[TempImagesController::class,'create'])->name('temp-images.create');
 
+        Route::get('/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.edit');
+
+
+
     });
 
 });
