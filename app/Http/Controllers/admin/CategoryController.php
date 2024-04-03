@@ -149,8 +149,14 @@ class CategoryController extends Controller
                 // resize image using image intervention
                 $manager = new ImageManager(new Driver());
                 $image = $manager->read($sPath);
-                $image = $image->resize(300,300);
+                // $image = $image->resize(300,300);
+                $image = $image->resize(450, 600, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
                 $image->toPng()->save($dPath);
+
+                
 
 
                 $category->image = $newImageName;
